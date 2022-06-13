@@ -1,0 +1,183 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>be.vito.rma.resttools</groupId>
+	<artifactId>resttools</artifactId>
+	<version>4.4.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>resttools-api</module>
+		<module>resttools-client</module>
+		<module>resttools-demo-client</module>
+		<module>resttools-demo-server</module>
+		<module>resttools-errors</module>
+		<module>resttools-json</module>
+		<module>resttools-server</module>
+		<module>resttools-spring</module>
+		<module>resttools-tools</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<version.configtools>2.2.0</version.configtools>
+		<version.lombok>1.18.6</version.lombok>
+		<version.jackson>2.9.9.2</version.jackson>
+		<version.spring>5.1.6.RELEASE</version.spring>
+		<version.slf4j>1.7.25</version.slf4j>
+		<version.logback>1.2.2</version.logback>
+		<version.junit>4.12</version.junit>
+		<version.okhttp>4.9.2</version.okhttp>
+		<version.okhttp.kotlin.stdlib>1.4.10</version.okhttp.kotlin.stdlib>
+		<version.tomcat>8.5.43</version.tomcat>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-demo-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-demo-server</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-errors</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-json</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-server</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-spring</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>be.vito.rma.resttools</groupId>
+				<artifactId>resttools-tools</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		
+			<dependency>
+				<groupId>be.vito.rma.configtools</groupId>
+				<artifactId>configtools-spring</artifactId>
+				<version>${version.configtools}</version>
+			</dependency>
+		
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${version.lombok}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${version.jackson}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+			
+			<!-- logging -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${version.slf4j}</version>
+			</dependency>
+			<!-- Spring uses JCL, so we redirect that over slf4j -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${version.slf4j}</version>
+			</dependency>
+			<!-- bind slf4j logging to logback -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${version.logback}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.squareup.okhttp3</groupId>
+				<artifactId>okhttp</artifactId>
+				<version>${version.okhttp}</version>
+			</dependency>
+			<!-- okhttp has conflicting kotlin-stdlib dependencies -->
+			<dependency>
+				<groupId>org.jetbrains.kotlin</groupId>
+				<artifactId>kotlin-stdlib</artifactId>
+				<version>${version.okhttp.kotlin.stdlib}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jetbrains.kotlin</groupId>
+				<artifactId>kotlin-stdlib-common</artifactId>
+				<version>${version.okhttp.kotlin.stdlib}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-servlet-api</artifactId>
+				<version>${version.tomcat}</version>
+				<scope>provided</scope>
+			</dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+</project>

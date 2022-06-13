@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>be.vito.rma.resttools</groupId>
+		<artifactId>resttools</artifactId>
+		<version>4.4.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>resttools-demo-client</artifactId>
+	
+	<build>
+		<!-- This tells maven to scan the given directory for property files and 
+			replaces maven properties in those files This is used here to get the project 
+			version into src/main/resources/configuration.properties automatically -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<!-- to create a .jar that contains all dependencies -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<minimizeJar>false</minimizeJar>	<!-- leave out classes that are not used -->
+							<!-- leave out module-info.class files from the dependencies: our 
+								uber-jar is no Java module anyway the '[WARNING] Discovered module-info.class. 
+								Shading will break its strong encapsulation.' warnings will still be printed, 
+								but they can be ignored safely (unless we are building a Java module, but 
+								then we shouldn't be using the shade plugin!) -->
+							<filter>
+								<artifact>*:*</artifact>
+								<excludes>
+									<exclude>module-info.class</exclude>
+								</excludes>
+							</filter>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									location of the main class
+									<mainClass>be.vito.rma.resttools.fileclient.Main</mainClass>
+									we need to include this in the manifest, otherwise the imageIO
+									libs won't work (required for geotiff reading) found this
+									solution on http://johnewart.net/posts/2012/08/geotools/
+									God knows why imageIO wants to see these Implementation-xxx tags
+									in the manifest!
+									<manifestEntries>
+										<Implementation-Vendor>Stijn Van Looy</Implementation-Vendor>
+										<Implementation-Vendor-Id>be.vito.rma</Implementation-Vendor-Id>
+										<Implementation-Version>1.0</Implementation-Version>
+									</manifestEntries>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.handlers</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.schemas</resource>
+								</transformer>
+								This bit merges the various GeoTools META-INF/services files
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<dependencies>
+		<dependency>
+			<groupId>be.vito.rma.resttools</groupId>
+			<artifactId>resttools-client</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		
+	</dependencies>
+	
+</project>

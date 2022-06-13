@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>be.vito.rma.resttools</groupId>
+		<artifactId>resttools</artifactId>
+		<version>4.4.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>resttools-server</artifactId>
+	
+	<dependencies>
+	
+		<dependency>
+			<groupId>be.vito.rma.resttools</groupId>
+			<artifactId>resttools-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>be.vito.rma.resttools</groupId>
+			<artifactId>resttools-errors</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>be.vito.rma.resttools</groupId>
+			<artifactId>resttools-json</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>be.vito.rma.resttools</groupId>
+			<artifactId>resttools-tools</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>be.vito.rma.configtools</groupId>
+			<artifactId>configtools-spring</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		
+	</dependencies>
+	
+</project>

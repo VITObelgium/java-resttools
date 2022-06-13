@@ -1,0 +1,54 @@
+		-= !!! WARNING !!! =- 
+
+These instructions apply to development environments only!
+Because we expose the service over http!
+In production environments: 
+	make sure the service is configured to use https
+	and the service is exposed over https!
+	also: make sure the environment variable DEMO_DEVELOPMENT_MODE is not set
+		(if set to 1, the debug port is exposed and CORS is disabled)
+	
+	
+
+-= DOCKER-COMPOSE - DEVELOPMENT / LOCAL (INTEGRATION) TESTING =-
+
+1/ build the project
+
+	mvn clean package
+	
+2/ build the docker container image and load it in the docker environment
+	
+	cd resttools-demo-server
+	mvn compile jib:dockerBuild
+	
+3/ check if the configuration in docker-compose.yml is ok (environment variable values) 	
+	
+4/ start the docker containers with
+	
+	cd docker-resttools-demo-server
+	docker-compose up -d
+	
+5/ check if everything went OK
+
+	http://localhost:8080/demo/healthcheck
+	http://localhost:8080/demo/version
+	
+	run /resttools-demo-client/src/main/java/be/vito/rma/resttools/fileclient/Main.java
+	run /resttools-demo-client/src/main/java/be/vito/rma/resttools/fileclient/LargeFileTest.java
+	
+	remote debugging is available @ localhost:8000
+	
+6/ extras 
+	
+	server logs can be followed with:
+		docker-compose logs --follow
+
+	containers can be shut down and removed with:
+		docker-compose down
+
+	list running containers:
+		docker ps -a
+		
+	list available docker images:
+		docker images
+				

@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>be.vito.rma.resttools</groupId>
+		<artifactId>resttools</artifactId>
+		<version>4.4.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>resttools-demo-server</artifactId>
+	<packaging>war</packaging>
+	
+	<build>
+		<!-- This tells maven to scan the given directory for property files and 
+			replaces maven properties in those files This is used here to get the project 
+			version into src/main/resources/configuration.properties automatically -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.1.4</version>
+				<configuration>
+					<from>
+						<image>tomcat:8-jdk11</image>
+					</from>
+					<container>
+						<ports>8000</ports> <!-- expose debugging port -->
+						<appRoot>/usr/local/tomcat/webapps/ROOT</appRoot>
+						<entrypoint>/bin/bash,start.sh</entrypoint>
+						<creationTime>USE_CURRENT_TIMESTAMP</creationTime>	<!-- default = 1/1/1970 and we don't want that -->
+					</container>
+					<!-- Copies files from 'jib-extras' into the image (when using docker-compose we would use volumes for this) -->
+					<extraDirectories>
+						<paths>
+							<path>jib-extras</path>
+						</paths>
+					</extraDirectories>
+					<to>
+						<image>${project.artifactId}</image>
+						<tags>
+							<tag>${project.version}</tag>
+						</tags>
+					</to>
+					<!-- https://mcr.marvin.vito.local uses a self-signed certificate => need to set this to true -->
+					<allowInsecureRegistries>true</allowInsecureRegistries>
+				</configuration>
+		    </plugin>
+		</plugins>
+	</build>
+	
+	
+	<dependencies>
+	
+		<dependency>
+			<groupId>be.vito.rma.resttools</groupId>
+			<artifactId>resttools-server</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+		</dependency>
+	</dependencies>
+	
+</project>

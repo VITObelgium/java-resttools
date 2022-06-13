@@ -1,0 +1,27 @@
+useful for developers
+----------------------
+
+resttools-client				tools to build Java clients for REST services
+
+resttools-server				tools to build Java REST service servers
+
+resttools-json					tools for handling JSON data
+
+resttools-spring				Spring framework related tools
+
+resttools-demo-client			demo REST (file) client implementation
+
+resttools-demo-server			demo REST (file) server implementation
+
+
+
+internal components
+--------------------
+
+resttools						parent project
+
+resttools-api					common API for the other resttools components
+
+resttools-errors				error handling API for the other resttools components
+
+resttools-tools					tools used by the other resttools components 

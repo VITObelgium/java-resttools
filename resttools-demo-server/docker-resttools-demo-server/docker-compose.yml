@@ -1,0 +1,20 @@
+version: '3'
+services:
+  rest:
+    image: resttools-demo-server
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+    networks:
+      - my_network
+    environment:
+      - DEMO_DEVELOPMENT_MODE=1
+      - DEMO_DEPLOY_PATH=demo
+      - FILES_PREFIX=/filedata
+      - FILES_SIZE_LIMIT=3221225472
+    volumes:
+      - /dev/shm/:/filedata
+      
+networks:
+  my_network:
+  
