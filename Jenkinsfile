@@ -62,8 +62,8 @@ pipeline {
 			environment {
 				registry = "rma-tools-docker-local.repo.vito.be"
 				registryCredential = "svc_git_rma"
-				version = sh(script: "cat resttools-auth-server/target/version.txt", returnStdout: true).trim()
-				artifactId = sh(script: "cat resttools-auth-server/target/artifactId.txt", returnStdout: true).trim()
+				version = sh(script: "cat resttools-demo-server/target/version.txt", returnStdout: true).trim()
+				artifactId = sh(script: "cat resttools-demo-server/target/artifactId.txt", returnStdout: true).trim()
 				timestamp = sh(script: "date +%Y%m%d.%H%M%S", returnStdout: true).trim()
 			}
 			stages {
