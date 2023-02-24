@@ -7,7 +7,9 @@ import java.util.HashMap;
  *
  *  For example:
  *
+ *	  <pre>{@code
  *    grant_type=client_credentials&scope=none
+ *    }</pre>
  *
  */
 public class FormBody extends HashMap<String, String> {
@@ -15,9 +17,9 @@ public class FormBody extends HashMap<String, String> {
 	private static final long serialVersionUID = 6977708115238552184L;
 
 	public String createBody() {
-		StringBuffer sb = new StringBuffer();
-		String separator = "&";
-		for (String key : keySet()) {
+		final StringBuffer sb = new StringBuffer();
+		final String separator = "&";
+		for (final String key : keySet()) {
 			sb.append(key);
 			sb.append("=");
 			sb.append(get(key));

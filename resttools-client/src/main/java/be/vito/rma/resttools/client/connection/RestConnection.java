@@ -33,26 +33,26 @@ public interface RestConnection {
 
 	/**
 	 * default is 10 seconds, 0 means wait forever
-	 * @param milliseconds
+	 * @param milliseconds connect timeout in milliseconds
 	 */
 	public void setConnectTimeout(int milliseconds);
 
 	/**
 	 * default is 10 seconds, 0 means wait forever
-	 * @param milliseconds
+	 * @param milliseconds read timeout in milliseconds
 	 */
 	public void setReadTimeout(int milliseconds);
 
 	/**
 	 * default is 10 seconds, 0 means wait forever
-	 * @param milliseconds
+	 * @param milliseconds write timeout in milliseconds
 	 */
 	public void setWriteTimeout(int milliseconds);
 
 	/**
 	 * timeout for complete calls
 	 * default is 0 (== wait forever)
-	 * @param milliseconds
+	 * @param milliseconds call timeout in milliseconds
 	 */
 	public void setCallTimeout(int milliseconds);
 
@@ -67,8 +67,8 @@ public interface RestConnection {
 	 * from exploits. When using the setProxy method, only requests through this RestConnection instance will "know"
 	 * about the proxy. Requests from exploits won't. Using a proxy this way will automatically block
 	 * all outgoing requests that originate from exploits.
-	 * @param hostname
-	 * @param port
+	 * @param hostname hostname of the proxy
+	 * @param port port of the proxy
 	 */
 	public void setProxy (@NonNull final String hostname, final int port);
 
@@ -80,28 +80,26 @@ public interface RestConnection {
 	/**
 	 * Override retry scheme
 	 * default is first retry after 10 seconds, give up after a day
-	 * @param retryScheme
+	 * @param retryScheme the new RetryScheme
 	 */
 	public void setRetryScheme (RetryScheme retryScheme);
 
 	/**
 	 * Get the current retry scheme
-	 * @return
+	 * @return the current RetryScheme
 	 */
 	public RetryScheme getRetryScheme ();
 
 	/**
 	 * Add given HTTP headers to each request.
 	 * Set to null (default) or empty HttpHeaders object to add no headers to the requests.
-	 * @param headers
+	 * @param headers the HTTP headers to use for each request
 	 */
 	public void setRequestHeaders (HttpHeaders headers);
 
 	/**
 	 * Create request
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
-	 * @param input
 	 */
 	public <I, O> O consumePost (Endpoint endpoint, I input, Class<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -109,8 +107,6 @@ public interface RestConnection {
 	/**
 	 * Create request
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
-	 * @param input
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> O consumePost (Endpoint endpoint, I input, Class<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -119,8 +115,6 @@ public interface RestConnection {
 	/**
 	 * Create request
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
-	 * @param input
 	 */
 	public <I, O> O consumePost (Endpoint endpoint, I input, TypeReference<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -128,8 +122,6 @@ public interface RestConnection {
 	/**
 	 * Create request
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
-	 * @param input
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> O consumePost (Endpoint endpoint, I input, TypeReference<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -138,9 +130,6 @@ public interface RestConnection {
 	/**
 	 * Retrieve request
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
-	 * @param outputType
-	 * @return
 	 */
 	public <O> O consumeGet (Endpoint endpoint, Class<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -148,9 +137,6 @@ public interface RestConnection {
 	/**
 	 * Retrieve request
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
-	 * @param outputType
-	 * @return
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <O> O consumeGet (Endpoint endpoint, Class<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -159,9 +145,6 @@ public interface RestConnection {
 	/**
 	 * Retrieve request
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
-	 * @param outputType
-	 * @return
 	 */
 	public <O> O consumeGet (Endpoint endpoint, TypeReference<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -169,9 +152,6 @@ public interface RestConnection {
 	/**
 	 * Retrieve request
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
-	 * @param outputType
-	 * @return
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <O> O consumeGet (Endpoint endpoint, TypeReference<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -179,16 +159,12 @@ public interface RestConnection {
 
 	/**
 	 * update request with no expected output
-	 * @param endpoint
-	 * @param input
 	 */
 	public <I> void consumePut (Endpoint endpoint, I input,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
 
 	/**
 	 * update request with no expected output
-	 * @param endpoint
-	 * @param input
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I> void consumePut (Endpoint endpoint, I input, ErrorResponseHandler errorResponseHandler,
@@ -197,8 +173,6 @@ public interface RestConnection {
 	/**
 	 * update request with an expected output
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
-	 * @param input
 	 */
 	public <I,O> O consumePut (Endpoint endpoint, I input, Class<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -206,8 +180,6 @@ public interface RestConnection {
 	/**
 	 * update request with an expected output
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
-	 * @param input
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> O consumePut (Endpoint endpoint, I input, Class<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -216,8 +188,6 @@ public interface RestConnection {
 	/**
 	 * update request with an expected output
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
-	 * @param input
 	 */
 	public <I,O> O consumePut (Endpoint endpoint, I input, TypeReference<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -225,8 +195,6 @@ public interface RestConnection {
 	/**
 	 * update request with an expected output
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
-	 * @param input
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> O consumePut (Endpoint endpoint, I input, TypeReference<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -234,14 +202,12 @@ public interface RestConnection {
 
 	/**
 	 * delete request with no expected output
-	 * @param endpoint
 	 */
 	public void consumeDelete (Endpoint endpoint,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
 
 	/**
 	 * delete request with no expected output
-	 * @param endpoint
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public void consumeDelete (Endpoint endpoint, ErrorResponseHandler errorResponseHandler,
@@ -250,7 +216,6 @@ public interface RestConnection {
 	/**
 	 * delete request with an expected output
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
 	 */
 	public <O> O consumeDelete (Endpoint endpoint, Class<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -258,7 +223,6 @@ public interface RestConnection {
 	/**
 	 * delete request with an expected output
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <O> O consumeDelete (Endpoint endpoint, Class<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -267,7 +231,6 @@ public interface RestConnection {
 	/**
 	 * delete request with an expected output
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
 	 */
 	public <O> O consumeDelete (Endpoint endpoint, TypeReference<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -275,7 +238,6 @@ public interface RestConnection {
 	/**
 	 * delete request with an expected output
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <O> O consumeDelete (Endpoint endpoint, TypeReference<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -287,11 +249,6 @@ public interface RestConnection {
 	 * This method returns body and response headers, which makes it useful if
 	 * the response headers are also needed.
 	 * Use this one for simple output types, for example String
-	 * @param endpoint
-	 * @param method
-	 * @param input
-	 * @param outputType
-	 * @return
 	 * @throws HttpErrorMessagesException
 	 */
 	public <I, O> Response<O> consume (Endpoint endpoint, HttpMethod method, I input, Class<O> outputType,
@@ -304,11 +261,6 @@ public interface RestConnection {
 	 * This method returns body and response headers, which makes it useful if
 	 * the response headers are also needed.
 	 * Use this one for composed output types, for example List<String>
-	 * @param endpoint
-	 * @param method
-	 * @param input
-	 * @param outputType
-	 * @return
 	 * @throws HttpErrorMessagesException
 	 */
 	public <I, O> Response<O> consume (Endpoint endpoint, HttpMethod method, I input, TypeReference<O> outputType,
@@ -318,13 +270,6 @@ public interface RestConnection {
 	/**
 	 * Same as above, but with own error response handler instead of expecting ErrorMessages in the response
 	 * and throwing an HttpErrorMessagesException when receiving them.
-	 * @param endpoint
-	 * @param method
-	 * @param input
-	 * @param outputType
-	 * @param errorResponseHandler
-	 * @param parameters
-	 * @return
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> Response<O> consume (Endpoint endpoint, HttpMethod method, I input, Class<O> outputType,
@@ -333,13 +278,6 @@ public interface RestConnection {
 	/**
 	 * Same as above, but with own error response handler instead of expecting ErrorMessages in the response
 	 * and throwing an HttpErrorMessagesException when receiving them.
-	 * @param endpoint
-	 * @param method
-	 * @param input
-	 * @param outputType
-	 * @param errorResponseHandler
-	 * @param parameters
-	 * @return
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> Response<O> consume (Endpoint endpoint, HttpMethod method, I input, TypeReference<O> outputType,
@@ -348,11 +286,7 @@ public interface RestConnection {
 	/**
 	 * File download request, not all HTTP methods support input payloads (for example: the GET method
 	 * requires a null body), in that case use a VoidType instance as input
-	 * @param endpoint
-	 * @param method
-	 * @param input
 	 * @param targetFile the location into which the downloaded file must be saved
-	 * @param parameters
 	 * @throws HttpErrorMessagesException
 	 */
 	public <I> void downloadFile (Endpoint endpoint, HttpMethod method, I input, File targetFile,
@@ -362,12 +296,6 @@ public interface RestConnection {
 	/**
 	 * Same as above, but with own error response handler instead of expecting ErrorMessages in the response
 	 * and throwing an HttpErrorMessagesException when receiving them.
-	 * @param endpoint
-	 * @param method
-	 * @param input
-	 * @param targetFile
-	 * @param errorResponseHandler
-	 * @param parameters
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called
 	 */
 	public <I> void downloadFile (final Endpoint endpoint, final HttpMethod method, final I input, final File targetFile,

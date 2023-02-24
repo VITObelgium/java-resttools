@@ -47,7 +47,7 @@ public class RetryScheme {
 	/**
 	 * Use first retry and give up after values from given RetryScheme
 	 * as default values for those parameters
-	 * @param other
+	 * @param other RetryScheme to copy the parameters from
 	 */
 	public static void setDefaults (final RetryScheme other) {
 		setDefaultFirstRetry(other.firstRetry);

@@ -11,6 +11,7 @@ import org.springframework.util.LinkedMultiValueMap;
  *  Helper class for doing multipart/form-data post requests
  *  for Example:
  *
+ *  <pre>{@code
  *  RestConnection conn = new DefaultRestConnection("https://some.rest.api/");
  *  MultiPartBody multiPartBody = new MultiPartBody();
  *  multiPartBody.addStringPart("part name", "part value");
@@ -19,7 +20,7 @@ import org.springframework.util.LinkedMultiValueMap;
  *  multiPartBody.addFilePart("file part name", new File("/some/file"));
  *  Response<VoidType> response = conn.consume(new Endpoint("endpoint_name"), HttpMethod.POST,
  *      multiPartBody, VoidType.class, new LoggingErrorResponseHandler());
- *
+ *	}</pre>
  *
  * @author (c) 2018 Stijn.VanLooy@vito.be
  *

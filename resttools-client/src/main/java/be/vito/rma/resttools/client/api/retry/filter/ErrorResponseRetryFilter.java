@@ -25,10 +25,10 @@ public interface ErrorResponseRetryFilter {
 	/**
 	 * called if an error response (status code != 200 OK) is received
 	 * and the received status code is unknown to the Spring framework
-	 * @param statusCode
-	 * @param responseBody
-	 * @param requestUrl
-	 * @param requestBody
+	 * @param statusCode the status code that was received
+	 * @param responseBody the body of the error response
+	 * @param requestUrl the request URL that resulted in the error response
+	 * @param requestBody the request body that resulted in the error response
 	 * @return true if the request should be tried again, false if it should not be retried
 	 */
 	public boolean retry (final int statusCode, final String responseBody,
@@ -38,9 +38,9 @@ public interface ErrorResponseRetryFilter {
 	 * Called if an exception occurred without receiving a response from the server
 	 * for example a ResourceAccessException (caused by for example a timeout) or
 	 * unexpected (Runtime)Exceptions.
-	 * @param e
-	 * @param requestUrl
-	 * @param requestBody
+	 * @param e the exception that was thrown
+	 * @param requestUrl the request URL that resulted in the error response
+	 * @param requestBody the request body that resulted in the error response
 	 * @return true if the request should be tried again, false if it should not be retried
 	 */
 	public boolean retry (Exception e, final String requestUrl, final String requestBody);
