@@ -2,4 +2,6 @@
 	. first version without authentication related code (see auth repo for previous versions)
 	
 4.4.1:
-	. 
+	. configtools version update 2.2.0 -> 2.2.1 (== open source version)
+	. first open source version (github + maven central)
+	
