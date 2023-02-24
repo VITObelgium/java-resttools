@@ -15,7 +15,7 @@ public interface BodyParser<O> {
 
 	/**
 	 * Parses body into an O instance in response
-	 * @param the body to parse
+	 * @param body the body to parse
 	 * @param response parsed O instance wrapped into a Response instance
 	 */
 	public void parseBody (String body, Response<O> response);
