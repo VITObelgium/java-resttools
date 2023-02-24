@@ -100,6 +100,14 @@ public interface RestConnection {
 	/**
 	 * Create request
 	 * Use this one for simple output types, for example String
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <I, O> O consumePost (Endpoint endpoint, I input, Class<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -107,6 +115,14 @@ public interface RestConnection {
 	/**
 	 * Create request
 	 * Use this one for simple output types, for example String
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> O consumePost (Endpoint endpoint, I input, Class<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -115,6 +131,14 @@ public interface RestConnection {
 	/**
 	 * Create request
 	 * Use this one for composed output types, for example List<String>
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <I, O> O consumePost (Endpoint endpoint, I input, TypeReference<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -122,6 +146,14 @@ public interface RestConnection {
 	/**
 	 * Create request
 	 * Use this one for composed output types, for example List<String>
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> O consumePost (Endpoint endpoint, I input, TypeReference<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -130,6 +162,12 @@ public interface RestConnection {
 	/**
 	 * Retrieve request
 	 * Use this one for simple output types, for example String
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <O> O consumeGet (Endpoint endpoint, Class<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -137,6 +175,12 @@ public interface RestConnection {
 	/**
 	 * Retrieve request
 	 * Use this one for simple output types, for example String
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <O> O consumeGet (Endpoint endpoint, Class<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -145,6 +189,12 @@ public interface RestConnection {
 	/**
 	 * Retrieve request
 	 * Use this one for composed output types, for example List<String>
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <O> O consumeGet (Endpoint endpoint, TypeReference<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -152,6 +202,12 @@ public interface RestConnection {
 	/**
 	 * Retrieve request
 	 * Use this one for composed output types, for example List<String>
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <O> O consumeGet (Endpoint endpoint, TypeReference<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -159,12 +215,23 @@ public interface RestConnection {
 
 	/**
 	 * update request with no expected output
+	 * @param <I> input type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <I> void consumePut (Endpoint endpoint, I input,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
 
 	/**
 	 * update request with no expected output
+	 * @param <I> input type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I> void consumePut (Endpoint endpoint, I input, ErrorResponseHandler errorResponseHandler,
@@ -173,6 +240,14 @@ public interface RestConnection {
 	/**
 	 * update request with an expected output
 	 * Use this one for simple output types, for example String
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <I,O> O consumePut (Endpoint endpoint, I input, Class<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -180,6 +255,14 @@ public interface RestConnection {
 	/**
 	 * update request with an expected output
 	 * Use this one for simple output types, for example String
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> O consumePut (Endpoint endpoint, I input, Class<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -188,6 +271,14 @@ public interface RestConnection {
 	/**
 	 * update request with an expected output
 	 * Use this one for composed output types, for example List<String>
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <I,O> O consumePut (Endpoint endpoint, I input, TypeReference<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -195,6 +286,14 @@ public interface RestConnection {
 	/**
 	 * update request with an expected output
 	 * Use this one for composed output types, for example List<String>
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> O consumePut (Endpoint endpoint, I input, TypeReference<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -202,12 +301,18 @@ public interface RestConnection {
 
 	/**
 	 * delete request with no expected output
+	 * @param endpoint endpoint to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public void consumeDelete (Endpoint endpoint,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
 
 	/**
 	 * delete request with no expected output
+	 * @param endpoint endpoint to use
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public void consumeDelete (Endpoint endpoint, ErrorResponseHandler errorResponseHandler,
@@ -216,6 +321,12 @@ public interface RestConnection {
 	/**
 	 * delete request with an expected output
 	 * Use this one for simple output types, for example String
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <O> O consumeDelete (Endpoint endpoint, Class<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -223,6 +334,12 @@ public interface RestConnection {
 	/**
 	 * delete request with an expected output
 	 * Use this one for simple output types, for example String
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <O> O consumeDelete (Endpoint endpoint, Class<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -231,6 +348,12 @@ public interface RestConnection {
 	/**
 	 * delete request with an expected output
 	 * Use this one for composed output types, for example List<String>
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <O> O consumeDelete (Endpoint endpoint, TypeReference<O> outputType,
 			RequestParameter... parameters) throws HttpErrorMessagesException;
@@ -238,6 +361,12 @@ public interface RestConnection {
 	/**
 	 * delete request with an expected output
 	 * Use this one for composed output types, for example List<String>
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <O> O consumeDelete (Endpoint endpoint, TypeReference<O> outputType, ErrorResponseHandler errorResponseHandler,
@@ -249,7 +378,15 @@ public interface RestConnection {
 	 * This method returns body and response headers, which makes it useful if
 	 * the response headers are also needed.
 	 * Use this one for simple output types, for example String
-	 * @throws HttpErrorMessagesException
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param method HTTP method to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type wrapped into a Response instance
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <I, O> Response<O> consume (Endpoint endpoint, HttpMethod method, I input, Class<O> outputType,
 			RequestParameter... parameters)
@@ -261,7 +398,15 @@ public interface RestConnection {
 	 * This method returns body and response headers, which makes it useful if
 	 * the response headers are also needed.
 	 * Use this one for composed output types, for example List<String>
-	 * @throws HttpErrorMessagesException
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param method HTTP method to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type wrapped into a Response instance
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <I, O> Response<O> consume (Endpoint endpoint, HttpMethod method, I input, TypeReference<O> outputType,
 			RequestParameter... parameters)
@@ -270,6 +415,15 @@ public interface RestConnection {
 	/**
 	 * Same as above, but with own error response handler instead of expecting ErrorMessages in the response
 	 * and throwing an HttpErrorMessagesException when receiving them.
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param method HTTP method to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type wrapped into a Response instance
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> Response<O> consume (Endpoint endpoint, HttpMethod method, I input, Class<O> outputType,
@@ -278,6 +432,15 @@ public interface RestConnection {
 	/**
 	 * Same as above, but with own error response handler instead of expecting ErrorMessages in the response
 	 * and throwing an HttpErrorMessagesException when receiving them.
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param endpoint endpoint to use
+	 * @param method HTTP method to use
+	 * @param input send this instance of the input type
+	 * @param outputType convert response into this output type
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @return the received instance of output type wrapped into a Response instance
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I, O> Response<O> consume (Endpoint endpoint, HttpMethod method, I input, TypeReference<O> outputType,
@@ -286,8 +449,13 @@ public interface RestConnection {
 	/**
 	 * File download request, not all HTTP methods support input payloads (for example: the GET method
 	 * requires a null body), in that case use a VoidType instance as input
+	 * @param <I> input type
+	 * @param endpoint endpoint to use
+	 * @param method HTTP method to use
+	 * @param input send this instance of the input type
 	 * @param targetFile the location into which the downloaded file must be saved
-	 * @throws HttpErrorMessagesException
+	 * @param parameters optional request parameters to translate into a HTTP query string
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public <I> void downloadFile (Endpoint endpoint, HttpMethod method, I input, File targetFile,
 			RequestParameter... parameters)
@@ -296,6 +464,13 @@ public interface RestConnection {
 	/**
 	 * Same as above, but with own error response handler instead of expecting ErrorMessages in the response
 	 * and throwing an HttpErrorMessagesException when receiving them.
+	 * @param <I> input type
+	 * @param endpoint endpoint to use
+	 * @param method HTTP method to use
+	 * @param input send this instance of the input type
+	 * @param targetFile the location into which the downloaded file must be saved
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
+	 * @param parameters optional request parameters to translate into a HTTP query string
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called
 	 */
 	public <I> void downloadFile (final Endpoint endpoint, final HttpMethod method, final I input, final File targetFile,
