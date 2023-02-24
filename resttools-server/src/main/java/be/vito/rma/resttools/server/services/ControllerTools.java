@@ -227,8 +227,8 @@ public class ControllerTools {
 	 * Parses a list from a number of candidate lists
 	 * The first non-null list is parsed. Other non-null candidates after that first one, are ignored
 	 * example use: when supporting serveral HTTP query syntaxes
-	 * Spring web already supports param=value1&param=value2 and param=value1,value2
-	 * If you want to support param[]=value1&param[]=value2 as well, you need to explicitly accept
+	 * {@code Spring web already supports param=value1&param=value2 and param=value1,value2
+	 * If you want to support param[]=value1&param[]=value2 as well}, you need to explicitly accept
 	 * _both_ the "param" and "param[]" query parameters. Then you can use this utility method to
 	 * extract the one that was used. The order of the arguments in this utility method determines
 	 * the preferred syntax
