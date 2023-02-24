@@ -53,10 +53,13 @@ public class ControllerTools {
 
 	/**
 	 * Use this one for simple input types, for example String
-	 * @param request
-	 * @param response
-	 * @param inputType
-	 * @param handler
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param request the request to handle
+	 * @param response the response that will be sent
+	 * @param successResponseHttpStatus the HTTP status to use if successful
+	 * @param inputType convert data in request into this input type
+	 * @param handler use this RequestHandler to process the request
 	 */
 	public final <I, O> void handleRequest (final HttpServletRequest request,
 			final HttpServletResponse response, final HttpStatus successResponseHttpStatus,
@@ -79,6 +82,12 @@ public class ControllerTools {
 
 	/**
 	 * uses default OK HttpStatus when successful
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param request the request to handle
+	 * @param response the response that will be sent
+	 * @param inputType convert data in request into this input type
+	 * @param handler use this RequestHandler to process the request
 	 */
 	public final <I, O> void handleRequest (final HttpServletRequest request,
 			final HttpServletResponse response,
@@ -87,11 +96,14 @@ public class ControllerTools {
 	}
 
 	/**
-	 * Use this one for composed input types, for example List<String>
-	 * @param request
-	 * @param response
-	 * @param inputType
-	 * @param handler
+	 * Use this one for composed input types, for example {@code List<String>}
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param request the request to handle
+	 * @param response the response that will be sent
+	 * @param successResponseHttpStatus the HTTP status to use if successful
+	 * @param inputType convert data in request into this input type
+	 * @param handler use this RequestHandler to process the request
 	 */
 	public final <I, O> void handleRequest (final HttpServletRequest request,
 			final HttpServletResponse response, final HttpStatus successResponseHttpStatus,
@@ -114,6 +126,12 @@ public class ControllerTools {
 
 	/**
 	 * uses default OK HttpStatus when successful
+	 * @param <I> input type
+	 * @param <O> output type
+	 * @param request the request to handle
+	 * @param response the response that will be sent
+	 * @param inputType convert data in request into this input type
+	 * @param handler use this RequestHandler to process the request
 	 */
 	public final <I, O> void handleRequest (final HttpServletRequest request,
 			final HttpServletResponse response,
@@ -123,9 +141,9 @@ public class ControllerTools {
 
 	/**
 	 *
-	 * @param request
+	 * @param request the request to handle
 	 * @param requiredApiKey if null or empty, all requests will result in invalid_api_key
-	 * @throws HttpErrorMessagesException
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public void handleApiKey (final HttpServletRequest request, final String requiredApiKey) throws HttpErrorMessagesException {
 		final String actualApiKey = request.getHeader("X-Api-Key");
@@ -197,8 +215,8 @@ public class ControllerTools {
 
 	/**
 	 * Parse String valued path variables or request parameters
-	 * @param data
-	 * @return
+	 * @param data string to parse
+	 * @return the parsed string
 	 */
 	public final String parseString (final String data) {
 		if (data == null || data.length() == 0) return null;
@@ -214,8 +232,9 @@ public class ControllerTools {
 	 * _both_ the "param" and "param[]" query parameters. Then you can use this utility method to
 	 * extract the one that was used. The order of the arguments in this utility method determines
 	 * the preferred syntax
-	 * @param dataCandidates
-	 * @return
+	 * @param dataCandidate1 the first accepted query parameter name
+	 * @param dataCandidate2 the second/alternative accepted query parameter name
+	 * @return the parsed list of query parameter values
 	 */
 	public final List<String> parseStringList (final List<String> dataCandidate1, final List<String> dataCandidate2) {
 		return parseStringList(dataCandidate1 != null ? dataCandidate1 : dataCandidate2);
@@ -233,9 +252,9 @@ public class ControllerTools {
 
 	/**
 	 * Parse integer valued path variables or request parameters
-	 * @param data
-	 * @return
-	 * @throws HttpErrorMessagesException
+	 * @param data string to parse
+	 * @return the parsed integer
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public final Integer parseInt (final String data) throws HttpErrorMessagesException {
 		if (data == null || data.length() == 0) return null;
@@ -250,9 +269,9 @@ public class ControllerTools {
 
 	/**
 	 * Parse long valued path variables or request parameters
-	 * @param data
-	 * @return
-	 * @throws HttpErrorMessagesException
+	 * @param data string to parse
+	 * @return the parsed long
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public final Long parseLong (final String data) throws HttpErrorMessagesException {
 		if (data == null || data.length() == 0) return null;
@@ -267,8 +286,8 @@ public class ControllerTools {
 
 	/**
 	 * Parse boolean valued path variables or request parameters
-	 * @param data
-	 * @return
+	 * @param data string to parse
+	 * @return the parsed boolean
 	 */
 	public final Boolean parseBoolean (final String data) {
 		if (data == null || data.length() == 0) return null;
@@ -277,9 +296,9 @@ public class ControllerTools {
 
 	/**
 	 * Parse ISO8601 datetime valued path variables or request parameters
-	 * @param data
-	 * @return
-	 * @throws HttpErrorMessagesException
+	 * @param data string to parse
+	 * @return the parsed date
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public final Date parseIso8601TimeStamp (final String data) throws HttpErrorMessagesException {
 		if (data == null || data.length() == 0) return null;
@@ -312,18 +331,17 @@ public class ControllerTools {
 	// -- file upload/download handling -- //
 
 	/**
-	 *
-	 * @param request
-	 * @param response
-	 * @param inputType
-	 * @param handler
-	 * @param filename2report controls which filename (for the downloaded file) is reported in the response: if given the given name is used; if null the actual filename on the server is used (which you might not want to expose)
+	 * @param <I> input type
+	 * @param request the request to handle
+	 * @param response the response that will be sent
+	 * @param inputType convert data in request into this input type
+	 * @param handler use this RequestHandler to process the request
 	 */
 	public final <I> void handleFileDownloadRequest (final HttpServletRequest request,
 			final HttpServletResponse response, final Class<I> inputType, final RequestHandler<I, FileWrapper> handler) {
 		setNoCacheHeaders(response);
 		try {
-			final I input = inputType.equals(VoidType.class) ? null :	parseBody(request, inputType);
+			final I input = inputType.equals(VoidType.class) ? null : parseBody(request, inputType);
 			final FileWrapper file = handler.handleRequest(input);
 			streamDownloadedFile(file, response);
 		} catch (final HttpErrorMessagesException e) {
@@ -372,6 +390,11 @@ public class ControllerTools {
 
 	/**
 	 * uses default OK HttpStatus when successful
+	 * @param <O> output type
+	 * @param request the request to handle
+	 * @param response the response that will be sent
+	 * @param handler use this RequestHandler to process the request
+	 * @param maxSize maximum file size that is accepted (in bytes)
 	 */
 	public final <O> void handleFileUploadRequest (final HttpServletRequest request,
 			final HttpServletResponse response,
@@ -381,11 +404,10 @@ public class ControllerTools {
 
 	/**
 	 *
-	 * @param request
-	 * @param response
-	 * @param handler
-	 * @param maxUploadSize
-	 * @param filename2report controls which filename (for the downloaded file) is reported in the response: if given the given name is used; if null the actual filename on the server is used (which you might not want to expose)
+	 * @param request the request to handle
+	 * @param response the response that will be sent
+	 * @param handler use this RequestHandler to process the request
+	 * @param maxUploadSize maximum file size that is accepted (in bytes)
 	 */
 	public final void handleFileExchangeRequest (final HttpServletRequest request,
 			final HttpServletResponse response, final FileRequestHandler<FileWrapper> handler, final long maxUploadSize) {
@@ -404,8 +426,8 @@ public class ControllerTools {
 
 	/**
 	 * Get the names of the file parts in a multipart request
-	 * @param request
-	 * @return
+	 * @param request the request containing the multipart body
+	 * @return an Iterator instance yielding the names of the file parts in the multipart body
 	 */
 	public final Iterator<String> getFilePartNames (final HttpServletRequest request) {
 		final MultipartHttpServletRequest mhsr = new StandardMultipartHttpServletRequest(request);
@@ -414,10 +436,10 @@ public class ControllerTools {
 
 	/**
 	 * Extract the file metadata of the file part with given name from a multipart request
-	 * @param request
-	 * @param filePartName
-	 * @return
-	 * @throws HttpErrorMessagesException
+	 * @param request the request containing the multipart body
+	 * @param filePartName the name of the file part
+	 * @return the metadata of the given file part
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public final MultipartFile getFilePartMetaData (final HttpServletRequest request, final String filePartName) throws HttpErrorMessagesException {
 		final MultipartHttpServletRequest mhsr = new StandardMultipartHttpServletRequest(request);
@@ -429,11 +451,11 @@ public class ControllerTools {
 	/**
 	 * Stream a file part from a multipart request into a given target file
 	 * Will not overwrite existing files. Parent directory must exist.
-	 * @param request
-	 * @param filePartName
+	 * @param request the request containing the multipart body
+	 * @param filePartName the name of the file part
 	 * @param maxSize maximum accepted file size in bytes
-	 * @param targetFile
-	 * @throws HttpErrorMessagesException
+	 * @param targetFile stream contents to this file
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public final void parseFilePart (final HttpServletRequest request, final String filePartName, final long maxSize, final File targetFile) throws HttpErrorMessagesException {
 		final MultipartFile mpf = getFilePartMetaData(request, filePartName);
@@ -451,8 +473,8 @@ public class ControllerTools {
 
 	/**
 	 * Get the names of the non-file parts in a multipart request
-	 * @param request
-	 * @return
+	 * @param request the request containing the multipart body
+	 * @return an Iterator instance yielding the names of the non-file parts in the multipart body
 	 */
 	public final Iterator<String> getPartNames (final HttpServletRequest request) {
 		return new Iterator<>() {
@@ -474,11 +496,12 @@ public class ControllerTools {
 	/**
 	 * Extract the value of the JSON part with given name from a multipart request
 	 * Use this one for simple input types, for example String
-	 * @param request
-	 * @param partName
-	 * @param outputType
-	 * @return
-	 * @throws HttpErrorMessagesException
+	 * @param <T> output type
+	 * @param request the request containing the multipart body
+	 * @param partName the name of the part
+	 * @param outputType the expected output type
+	 * @return the parsed instance of the given output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public final <T> T parseJsonPart (final HttpServletRequest request, final String partName, final Class<T> outputType) throws HttpErrorMessagesException {
 		final String json = getRawPart(request, partName);
@@ -487,12 +510,13 @@ public class ControllerTools {
 
 	/**
 	 * Extract the value of the JSON part with given name from a multipart request
-	 * Use this one for composed input types, for example List<String>
-	 * @param request
-	 * @param partName
-	 * @param outputType
-	 * @return
-	 * @throws HttpErrorMessagesException
+	 * Use this one for composed input types, for example {@code List<String>}
+	 * @param <T> output type
+	 * @param request the request containing the multipart body
+	 * @param partName the name of the part
+	 * @param outputType the expected output type
+	 * @return the parsed instance of the given output type
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public final <T> T parseJsonPart (final HttpServletRequest request, final String partName, final TypeReference<T> outputType) throws HttpErrorMessagesException {
 		final String json = getRawPart(request, partName);
@@ -501,10 +525,10 @@ public class ControllerTools {
 
 	/**
 	 * Extract the value of the String part with given name from a multipart request
-	 * @param request
-	 * @param partName
-	 * @return
-	 * @throws HttpErrorMessagesException
+	 * @param request the request containing the multipart body
+	 * @param partName the name of the part
+	 * @return the String value of the given part
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public final String parseStringPart (final HttpServletRequest request, final String partName) throws HttpErrorMessagesException {
 		return getRawPart(request, partName);

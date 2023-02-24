@@ -16,7 +16,7 @@ public final class FileWrapper {
 
 	/**
 	 *
-	 * @param file
+	 * @param file the File instance to wrap into this FileWrapper instance
 	 * @param reportedFilename filename to use in the content-disposition header (you might want to hide the filename on the server from the user)
 	 */
 	public FileWrapper(@NonNull final File file, @NonNull final String reportedFilename) {
