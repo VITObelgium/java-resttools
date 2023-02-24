@@ -12,8 +12,8 @@ public class DefaultRestConnection extends AbstractRestConnection {
 
 	/**
 	 * A REST connection that does NO health nor version checks
-	 * @param serviceUrl
-	 * @throws HttpErrorMessagesException
+	 * @param serviceUrl URL of the REST service to use
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public DefaultRestConnection (final String serviceUrl) throws HttpErrorMessagesException {
 		this(serviceUrl, null);
@@ -21,9 +21,9 @@ public class DefaultRestConnection extends AbstractRestConnection {
 
 	/**
 	 * A REST connection that does a health and version check before connecting
-	 * @param serviceUrl
-	 * @param requiredVersionPrefix
-	 * @throws HttpErrorMessagesException
+	 * @param serviceUrl URL of the REST service to use
+	 * @param requiredVersionPrefix version of the REST service must start with this prefix
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public DefaultRestConnection (final String serviceUrl, final String requiredVersionPrefix) throws HttpErrorMessagesException {
 		super(serviceUrl, requiredVersionPrefix);

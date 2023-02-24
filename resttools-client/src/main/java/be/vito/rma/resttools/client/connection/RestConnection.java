@@ -120,7 +120,7 @@ public interface RestConnection {
 	 * @param endpoint endpoint to use
 	 * @param input send this instance of the input type
 	 * @param outputType convert response into this output type
-	 * @param errorResponseHandler
+	 * @param errorResponseHandler custom ErrorResponseHandler to use
 	 * @param parameters optional request parameters to translate into a HTTP query string
 	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
@@ -130,7 +130,7 @@ public interface RestConnection {
 
 	/**
 	 * Create request
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <I> input type
 	 * @param <O> output type
 	 * @param endpoint endpoint to use
@@ -145,7 +145,7 @@ public interface RestConnection {
 
 	/**
 	 * Create request
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <I> input type
 	 * @param <O> output type
 	 * @param endpoint endpoint to use
@@ -188,7 +188,7 @@ public interface RestConnection {
 
 	/**
 	 * Retrieve request
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <O> output type
 	 * @param endpoint endpoint to use
 	 * @param outputType convert response into this output type
@@ -201,7 +201,7 @@ public interface RestConnection {
 
 	/**
 	 * Retrieve request
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <O> output type
 	 * @param endpoint endpoint to use
 	 * @param outputType convert response into this output type
@@ -231,7 +231,6 @@ public interface RestConnection {
 	 * @param input send this instance of the input type
 	 * @param errorResponseHandler custom ErrorResponseHandler to use
 	 * @param parameters optional request parameters to translate into a HTTP query string
-	 * @return the received instance of output type
 	 * @throws ErrorResponseException if an error response was received and the given ErrorResponseHandler was called (the method never returns null)
 	 */
 	public <I> void consumePut (Endpoint endpoint, I input, ErrorResponseHandler errorResponseHandler,
@@ -270,7 +269,7 @@ public interface RestConnection {
 
 	/**
 	 * update request with an expected output
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <I> input type
 	 * @param <O> output type
 	 * @param endpoint endpoint to use
@@ -285,7 +284,7 @@ public interface RestConnection {
 
 	/**
 	 * update request with an expected output
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <I> input type
 	 * @param <O> output type
 	 * @param endpoint endpoint to use
@@ -347,7 +346,7 @@ public interface RestConnection {
 
 	/**
 	 * delete request with an expected output
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <O> output type
 	 * @param endpoint endpoint to use
 	 * @param outputType convert response into this output type
@@ -360,7 +359,7 @@ public interface RestConnection {
 
 	/**
 	 * delete request with an expected output
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <O> output type
 	 * @param endpoint endpoint to use
 	 * @param outputType convert response into this output type
@@ -397,7 +396,7 @@ public interface RestConnection {
 	 * If your API needs this, it might be useful to consider redesigning your API
 	 * This method returns body and response headers, which makes it useful if
 	 * the response headers are also needed.
-	 * Use this one for composed output types, for example List<String>
+	 * Use this one for composed output types, for example {@code List<String>}
 	 * @param <I> input type
 	 * @param <O> output type
 	 * @param endpoint endpoint to use

@@ -23,9 +23,9 @@ public class BasicAuthRestConnection extends AbstractRestConnection {
 
 	/**
 	 * A Basic Auth REST connection that does NO health nor version checks
-	 * @param serviceUrl
-	 * @param credentials
-	 * @throws HttpErrorMessagesException
+	 * @param serviceUrl URL of the REST service to use
+	 * @param credentials basic auth credentials
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public BasicAuthRestConnection (final String serviceUrl, final BasicAuthCredentials credentials) throws HttpErrorMessagesException {
 		this(serviceUrl, null, credentials);
@@ -33,10 +33,10 @@ public class BasicAuthRestConnection extends AbstractRestConnection {
 
 	/**
 	 * A Basic Auth REST connection that does a health and version check before connecting
-	 * @param serviceUrl
-	 * @param requiredVersionPrefix
-	 * @param credentials
-	 * @throws HttpErrorMessagesException
+	 * @param serviceUrl URL of the REST service to use
+	 * @param requiredVersionPrefix version of the REST service must start with this prefix
+	 * @param credentials basic auth credentials
+	 * @throws HttpErrorMessagesException if something went wrong
 	 */
 	public BasicAuthRestConnection (final String serviceUrl, final String requiredVersionPrefix,
 			final BasicAuthCredentials credentials) throws HttpErrorMessagesException {
