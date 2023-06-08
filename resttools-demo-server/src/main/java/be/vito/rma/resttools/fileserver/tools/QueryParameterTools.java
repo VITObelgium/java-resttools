@@ -2,7 +2,7 @@ package be.vito.rma.resttools.fileserver.tools;
 
 import java.util.Map.Entry;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author (c) 2019 Stijn.VanLooy@vito.be

@@ -5,5 +5,5 @@
 	. configtools version update 2.2.0 -> 2.2.1 (== open source version)
 	. first open source version (github + maven central)
 	
-4.4.2:
-	. 
+5.0.0:
+	. update to java 17
