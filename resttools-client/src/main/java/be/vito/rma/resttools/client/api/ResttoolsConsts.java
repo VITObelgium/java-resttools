@@ -6,5 +6,5 @@ package be.vito.rma.resttools.client.api;
  */
 public class ResttoolsConsts {
 
-	public static final String CurrentVersionMajorPrefix = "4.";
+	public static final String CurrentVersionMajorPrefix = "5.";
 }

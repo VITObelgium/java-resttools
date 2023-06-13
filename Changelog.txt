@@ -9,4 +9,4 @@
 	. update to java 17
 	
 5.0.1:
-	. 
+	. bugfix: set CurrentVersionMajorPrefix to 5
