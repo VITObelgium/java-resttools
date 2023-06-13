@@ -10,3 +10,4 @@
 	
 5.0.1:
 	. bugfix: set CurrentVersionMajorPrefix to 5
+	. bugfix: corsfilter version update in tomcat setenv script

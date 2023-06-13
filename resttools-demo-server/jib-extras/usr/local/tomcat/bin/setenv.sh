@@ -34,7 +34,7 @@ fi
 if [ -z "$DEMO_DEVELOPMENT_MODE" ]
 then
 	rm /usr/local/tomcat/conf/web.xml.development
-	rm /usr/local/tomcat/lib/corsfilter-1.0.0-SNAPSHOT.jar
+	rm /usr/local/tomcat/lib/corsfilter-1.0.2.jar
 else
 	if [ "$DEMO_DEVELOPMENT_MODE" -eq 1 ]
 	then
